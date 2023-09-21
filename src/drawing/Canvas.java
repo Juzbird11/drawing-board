@@ -10,15 +10,10 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 
 import javax.imageio.ImageIO;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-import javax.swing.border.Border;
+import javax.swing.*;
 
 public class Canvas implements MouseMotionListener{
-    JFrame frame = new JFrame();
+    JFrame frame = new JFrame("Drawing Board");
     JPanel canvasPanel, toolBar, shapeBar;
     JButton btn;
     JTextField col, sz;
@@ -54,6 +49,25 @@ public class Canvas implements MouseMotionListener{
         shapeBar.setBackground(Color.white);
         shapeBar.setLayout(null);
         frame.add(shapeBar);
+
+        JButton line = new JButton("Line");
+        line.setBounds(30, 30, 190, 30);
+        shapeBar.add(line);
+
+        JButton rectangle = new JButton("Rectangle");
+        rectangle.setBounds(30, 90, 190, 30);
+        shapeBar.add(rectangle);
+
+        JButton circle = new JButton("Circle");
+        circle.setBounds(30, 150, 190, 30);
+        shapeBar.add(circle);
+
+        JCheckBox fillShapeColor = new JCheckBox("Filled");
+        fillShapeColor.setBounds(30, 200, 100, 50);
+        fillShapeColor.setOpaque(false);
+        shapeBar.add(fillShapeColor);
+
+
         //------------------------------------
 
         //-----------TOOLBAR-------------
