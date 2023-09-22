@@ -1,11 +1,9 @@
 package drawing;
 
-import ooo.MyShape;
-
 import java.awt.Color;
 import java.awt.Graphics;
 
-public class Line extends MyShape
+public class Line extends Shape
 {
     public Line() {
         super();
@@ -16,7 +14,7 @@ public class Line extends MyShape
     }
 
     public void draw(Graphics g) {
-        g.setColor(super.getColor());
-        g.drawLine(super.getX1(), super.getY1(), super.getX2(), super.getY2());
+        g.setColor(this.getColor());
+        g.drawLine(this.getX1(), this.getY1(), this.getX2(), this.getY2());
     }
 }
