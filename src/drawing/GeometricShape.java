@@ -7,10 +7,6 @@ abstract class GeometricShape extends Shape
 {
     private boolean filled;
 
-    public GeometricShape()
-    {
-        super();
-    }
     public GeometricShape(int x1, int y1, int x2, int y2,
                           Color myColor, boolean filled)
     {
@@ -18,23 +14,15 @@ abstract class GeometricShape extends Shape
         this.filled = filled;
     }
 
-
     public boolean isFilled()
     {
         return filled;
-    }
-
-
-    public void setFilled(boolean filled)
-    {
-        this.filled = filled;
     }
 
     public int getUpperLeftX()
     {
         return Math.min(super.getX1(), super.getX2());
     }
-
 
     public int getUpperLeftY()
     {

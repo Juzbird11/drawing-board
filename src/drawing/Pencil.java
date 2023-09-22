@@ -6,9 +6,6 @@ import java.util.LinkedList;
 public class Pencil extends Shape {
 
     private LinkedList<PencilPoint> points = new LinkedList<>();
-    public Pencil() {
-        super();
-    }
 
     public Pencil(int x1, int y1, int x2, int y2, Color myColor) {
         super(x1,y1,x2,y2,myColor);

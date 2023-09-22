@@ -7,11 +7,6 @@ import java.awt.Graphics;
 
 public class ShapeCircle extends GeometricShape
 {
-    public ShapeCircle()
-    {
-        super();
-    }
-
     public ShapeCircle(int x1, int y1, int x2, int y2,
                   Color myColor, boolean filled)
     {

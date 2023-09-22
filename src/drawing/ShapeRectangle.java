@@ -5,11 +5,6 @@ import java.awt.Graphics;
 
 public class ShapeRectangle extends GeometricShape
 {
-    public ShapeRectangle()
-    {
-        super();
-    }
-
     public ShapeRectangle(int x1, int y1, int x2, int y2,
                           Color myColor, boolean filled)
     {

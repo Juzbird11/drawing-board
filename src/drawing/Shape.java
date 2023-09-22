@@ -10,10 +10,6 @@ public abstract class Shape {
     private int y2;
     private Color color;
 
-    public Shape() {
-        this(0, 0, 0, 0, Color.BLACK);
-    }
-
     public Shape(int x1, int y1, int x2, int y2, Color color) {
         this.x1 = (x1 >= 0 ? x1 : 0);
         this.y1 = (y1 >= 0 ? y1 : 0);
@@ -26,11 +22,9 @@ public abstract class Shape {
         this.x1 = (x1 >= 0 ? x1 : 0);
     }
 
-
     public int getX1() {
         return x1;
     }
-
 
     public void setX2(int x2) {
         this.x2 = (x2 >= 0 ? x2 : 0);
@@ -56,11 +50,9 @@ public abstract class Shape {
         return y2;
     }
 
-
     public void setColor(Color color) {
         this.color = color;
     }
-
 
     public Color getColor() {
         return color;
