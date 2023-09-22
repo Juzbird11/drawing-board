@@ -1,2 +1,18 @@
-package drawing;public class Point {
+package drawing;
+
+public class PencilPoint {
+    private int x;
+    private int y;
+    public PencilPoint(int x, int y) {
+        this.x = x;
+        this.y = y;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
 }
