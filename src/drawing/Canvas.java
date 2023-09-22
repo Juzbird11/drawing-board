@@ -14,7 +14,7 @@ public class Canvas {
     JFrame frame = new JFrame("Drawing Board");
     JPanel toolBar, shapeBar;
     DrawPanel canvasPanel;
-    JButton btn, pencil, line, rectangle, circle;
+    JButton btn, pencil, line, rectangle, circle, undo, clean;
     JTextField col, sz;
     String prev, back;
     ButtonHandler handler;
@@ -56,12 +56,22 @@ public class Canvas {
             circle = new JButton("Circle");
             circle.setBounds(30, 210, 190, 30);
             shapeBar.add(circle);
+
+            undo = new JButton("UNDO");
+            undo.setBounds(30, 350, 80, 30);
+            shapeBar.add(undo);
+
+            clean = new JButton("CLEAN");
+            clean.setBounds(140, 350, 80, 30);
+            shapeBar.add(clean);
         }
 
         line.addActionListener(handler);
         rectangle.addActionListener(handler);
         circle.addActionListener(handler);
         pencil.addActionListener(handler);
+        undo.addActionListener(handler);
+        clean.addActionListener(handler);
 
         JCheckBox fillShapeColor = new JCheckBox("Filled");
         fillShapeColor.setBounds(30, 260, 100, 50);
@@ -91,9 +101,7 @@ public class Canvas {
             addButton(105, 210, "#964B00");
             addButton(177, 210, "#C32148");
         }
-        //-----------------------------
 
-        //---------CUSTOM---------------
         {
             JLabel cllabel = new JLabel("Custom Colors : ");
             cllabel.setBounds(30, 260, 100, 50);
@@ -119,81 +127,11 @@ public class Canvas {
                 }
             });
         }
-        //---------------------------------
-
-        //---------SIZE------------------
-        {
-            JLabel szlabel = new JLabel("Size : ");
-            szlabel.setBounds(30, 380, 100, 50);
-            toolBar.add(szlabel);
-            JButton sub = new JButton("-");
-            sub.setBounds(30, 415, 50, 30);
-            toolBar.add(sub);
-            sz = new JTextField();
-            sz.setBounds(100, 415, 50, 30);
-            sz.setText("5");
-            toolBar.add(sz);
-            JButton add = new JButton("+");
-            add.setBounds(170, 415, 50, 30);
-            toolBar.add(add);
-            sub.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    sz.setText(Integer.parseInt(sz.getText()) - 1 + "");
-                }
-            });
-            add.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    sz.setText(Integer.parseInt(sz.getText()) + 1 + "");
-                }
-            });
-        }
-        //-------------------------------
-
-        //---------PAINT&ERASE-----------------
-        {
-            JButton brush = new JButton("BRUSH");
-            brush.setBounds(30, 465, 80, 30);
-            toolBar.add(brush);
-            JButton undo = new JButton("UNDO");
-            undo.setBounds(140, 465, 80, 30);
-            toolBar.add(undo);
-            prev = "#000000";
-            brush.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    col.setText(prev);
-                }
-            });
-
-            undo.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    canvasPanel.undo();
-                }
-            });
-        }
-        //--------------------------------
-
-        //-----------CLEAN--------------
-        {
-            JButton clean = new JButton("CLEAN");
-            clean.setBounds(30, 515, 190, 30);
-            toolBar.add(clean);
-            clean.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    canvasPanel.clear();
-                }
-            });
-        }
-        //-------------------------------
 
         //-----------SAVE---------------
         {
             JButton save = new JButton("SAVE");
-            save.setBounds(30, 555, 190, 30);
+            save.setBounds(30, 410, 190, 30);
             toolBar.add(save);
             save.addActionListener(new ActionListener() {
                 @Override
@@ -228,21 +166,22 @@ public class Canvas {
     {
         @Override
         public void actionPerformed(ActionEvent event) {
-            if (event.getSource() == rectangle) {
+            if (event.getSource().equals(rectangle)) {
                 canvasPanel.setShapeType(3);
-            } else if (event.getSource() == circle) {
+            } else if (event.getSource().equals(circle)) {
                 canvasPanel.setShapeType(2);
-            } else if (event.getSource() == line) {
+            } else if (event.getSource().equals(line)) {
                 canvasPanel.setShapeType(1);
-            } else if (event.getSource() == pencil) {
+            } else if (event.getSource().equals(pencil)) {
                 canvasPanel.setShapeType(0);
+            } else if (event.getSource().equals(undo)) {
+                canvasPanel.undo();
+            } else if (event.getSource().equals(clean)) {
+                canvasPanel.clear();
             }
         }
     }
 
-    //-------------------------------------------------
-
-    //---------FUNCTIONS TO CREATE SIMILAR BUTTONS---------
     public void addButton(int x, int y, String clr) {
         this.btn = new JButton();
         btn.setBounds(x, y, 40, 40);
@@ -251,18 +190,17 @@ public class Canvas {
             @Override
             public void actionPerformed(ActionEvent e) {
                 col.setText(clr);
+                canvasPanel.setCurrentColor(Color.decode(clr));
             }
         });
         toolBar.add(btn);
     }
-    //-------------------------------------------------------
 
-    //----------FUNCTION TO CREATE IMAGE TO SAVE-----------------------------
     public BufferedImage getImg(Component comp) throws AWTException {
         Point p = comp.getLocationOnScreen();
         Dimension dim = comp.getSize();
         BufferedImage capture = new Robot().createScreenCapture(new Rectangle(p, dim));
         return capture;
     }
-    //--------------------------------------------------------------------------
+
 }

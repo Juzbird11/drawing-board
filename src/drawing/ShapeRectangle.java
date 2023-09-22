@@ -2,9 +2,7 @@ package drawing;
 
 import java.awt.Color;
 import java.awt.Graphics;
-/**
- * this class Declaration of class Rectangle.
- */
+
 public class ShapeRectangle extends GeometricShape
 {
     public ShapeRectangle()
